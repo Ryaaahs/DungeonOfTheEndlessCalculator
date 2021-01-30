@@ -1,7 +1,7 @@
 def main():
-
     # Main function
     running = True
+    firstRun = True
     startMenuIndex = 1
     endMenuIndex = 6
     startMajorModuleIndex = 1
@@ -12,30 +12,35 @@ def main():
     mechanicPalAmount = 0
 
     # Create main program loop
-    while running:
-        displayMenu()
-        userInput = input()
-
+    while running == True:
+        if firstRun == True:
+            displayMenu()
+            firstRun = False
+        else:
+            print()
+            displayMenu()
+        userInput = int(input())
+   
         while userInput < startMenuIndex or userInput > endMenuIndex:
             # Ask the user to reinput their value
             print("Please reinput a value between 1 - 6")
-            userInput = input()
+            userInput = int(input())
 
         # If we got out of the loop, check to see which user
         if userInput == 1:
             # Change Major Modules resource counts
+            print()
             print("Which one would you like to change?")
             print("1. Industry")
             print("2. Science")
             print("3. Food")
-            print("> ")
-            userInput = input()
+            print("> ", end='')
+            userInput = int(input())
 
-            while userInput < startMajorModuleIndex or 
-                userInput > endMajorModuleIndex:
+            while userInput < startMajorModuleIndex or userInput > endMajorModuleIndex:
                 # Ask the user to reinput their value
                 print("Please reinput a value between 1 - 3")
-                userInput = input()
+                userInput = int(input())
             defineResourceModuleTotals(majorModuleResourceCount, userInput); 
             
         elif userInput == 2:
@@ -60,21 +65,22 @@ def displayMenu():
     print("2. Change Major Modules resource level")
     print("3. Set mechanic pals count")
     print("4. Display the calculated values")
-    print("5. Display all resource levels based on resource count")
+    print("5. Display the calculated values using all resource levels")
     print("6. End program")
-    print("> ")
+    print("> ", end='')
 
 
 def defineResourceModuleTotals(majorModulesResourceCountList, userMenuChoice):
     if userMenuChoice == 1:
         # Industry
         print("How many total Industry modules of do you have?")
-        userInput = input()
+        userInput = int(input())
         
         while userInput < 0:
             # Ask the user to reinput their value
             print("Cannot have a negative amount of Industry modules")
-            userInput = input()
+            print("Please input a positive value")
+            userInput = int(input())
             
         # Assign the value to the right spot
         majorModulesResourceCountList["Industry"] = "a"
@@ -82,12 +88,13 @@ def defineResourceModuleTotals(majorModulesResourceCountList, userMenuChoice):
     elif userMenuChoice == 2:
         # Science
         print("How many total Science modules of do you have?")
-        userInput = input()
+        userInput = int(input())
         
         while userInput < 0:
             # Ask the user to reinput their value
             print("Cannot have a negative amount of Science modules")
-            userInput = input()
+            print("Please input a positive value")
+            userInput = int(input())
             
         # Assign the value to the right spot
         majorModulesResourceCountList["Science"] = userInput
@@ -95,12 +102,13 @@ def defineResourceModuleTotals(majorModulesResourceCountList, userMenuChoice):
     else:
         # Food
         print("How many total Food modules of do you have?")
-        userInput = input()
+        userInput = int(input())
         
         while userInput < 0:
             # Ask the user to reinput their value
             print("Cannot have a negative amount of Food modules")
-            userInput = input()
+            print("Please input a positive value")
+            userInput = int(input())
         
         # Assign the value to the right spot
         majorModulesResourceCountList["Food"] = userInput
