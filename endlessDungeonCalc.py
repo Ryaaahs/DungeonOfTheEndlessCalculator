@@ -6,9 +6,13 @@ def main():
     endMenuIndex = 6
     startMajorModuleIndex = 1
     endMajorModuleIndex = 3
+    startMechanicalPalIndex = 1
+    endMechanicalPalIndex = 2
     majorModuleResourceCount = {"Industry": 0, "Science": 0, "Food": 0}
     majorModuleResourceLevel = {"Industry": 0, "Science": 0, "Food": 0}
     resourceBaseAmounts = {"Industry": 5, "Science": 2, "Food": 4}
+    mechanicalPalLevelList = {1: 1, 2: 1.5, 3: 2, 4: 2.5}
+    mechanicalPalLevel = 0
     mechanicPalAmount = 0
 
     # Create main program loop
@@ -76,7 +80,41 @@ def main():
             
         elif userInput == 3:
             # Set mechanic pals count
-            print("hi")
+            print()
+            print("Which one would you like to change?")
+            print("1. Set Levels")
+            print("2. Set Count")
+            print("> ", end='')
+            userInput = int(input()) 
+            
+            while userInput < startMechanicalPalIndex or userInput > endMechanicalPalIndex:
+                # Ask the user to reinput their value
+                print("Please reinput a value between 1 - 2")
+                print("> ", end='')
+                userInput = int(input())
+            
+            if userInput == 1:
+                # Level
+                print("What level would you like to set it to? (Range of 1-4)")
+                userInput = int(input())
+                while userInput < 1 or userInput > 4:
+                    # Ask the user to reinput their value
+                    print("Please reinput a value between 1 - 4")
+                    print("> ", end='')
+                    userInput = int(input())
+                mechanicalPalLevel = mechanicalPalLevelList[userInput]
+            else:
+                # Count
+                print("How many total Mechanical Pals of do you have?")
+                userInput = int(input())
+                while userInput < 0:
+                    # Ask the user to reinput their value
+                    print("Cannot have a negative amount of Mechanical Pals?")
+                    print("Please input a positive value")
+                    print("> ", end='')
+                    userInput = int(input())
+                mechanicPalAmount = userInput
+                
         elif userInput == 4:
             # Display the calculated values
             print("hi")
@@ -91,7 +129,7 @@ def main():
 def displayMenu():
     print("1. Change Major Modules resource counts")
     print("2. Change Major Modules resource level")
-    print("3. Set mechanic pals count")
+    print("3. Change Mechanic Pals")
     print("4. Display the calculated values")
     print("5. Display the calculated values using all resource levels")
     print("6. End program")
