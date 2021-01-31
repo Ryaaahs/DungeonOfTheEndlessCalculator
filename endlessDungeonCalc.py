@@ -9,25 +9,16 @@ def main():
     startMechanicalPalIndex = 1
     endMechanicalPalIndex = 2
     majorModuleResourceCount = {"Industry": 0, "Science": 0, "Food": 0}
-    majorModuleResourceLevel = {"Industry": 0, "Science": 0, "Food": 0}
+    majorModuleResourceLevel = {"Industry": 1, "Science": 1, "Food": 1}
+    majorModuleResourceLevelList = {1: 3, 2: 4, 3: 5, 4: 6}
     resourceBaseAmounts = {"Industry": 5, "Science": 2, "Food": 4}
     mechanicalPalLevelList = {1: 1, 2: 1.5, 3: 2, 4: 2.5}
-    mechanicalPalLevel = 0
+    mechanicalPalLevel = 1
     mechanicPalAmount = 0
+    playerAmount = 1
 
     # Create main program loop
     while running == True:
-        print("Count")
-        for x in majorModuleResourceCount:
-            print(x)
-            print(majorModuleResourceCount[x]) 
-        print()
-        
-        print("Level")
-        for x in majorModuleResourceLevel:
-            print(x)
-            print(majorModuleResourceLevel[x]) 
-        print()
         
         if firstRun == True:
             displayMenu()
@@ -43,8 +34,10 @@ def main():
             print("> ", end='')
             userInput = int(input())
 
-        # If we got out of the loop, check to see which user
+        # If we got out of the loop, check to see which userInput we got
         if userInput == 1:
+            print()
+        elif userInput == 2:
             # Change Major Modules resource counts
             print()
             print("Which one would you like to change?")
@@ -61,7 +54,7 @@ def main():
                 userInput = int(input())
             defineResourceModuleTotals(majorModuleResourceCount, userInput); 
             
-        elif userInput == 2:
+        elif userInput == 3:
             # Change Major Modules resource level
             print()
             print("Which one would you like to change?")
@@ -78,7 +71,7 @@ def main():
                 userInput = int(input())
             defineResourceModuleLevel(majorModuleResourceLevel, userInput);
             
-        elif userInput == 3:
+        elif userInput == 4:
             # Set mechanic pals count
             print()
             print("Which one would you like to change?")
@@ -115,10 +108,42 @@ def main():
                     userInput = int(input())
                 mechanicPalAmount = userInput
                 
-        elif userInput == 4:
-            # Display the calculated values
-            print("hi")
         elif userInput == 5:
+            # Display the calculated values
+            # Industry
+            totalResources = (resourceBaseAmounts["Industry"] + returnMechanicalPalTotal(mechanicPalAmount, mechanicalPalLevel, mechanicalPalLevelList) + 
+            (majorModuleResourceCount["Industry"] * majorModuleResourceLevelList[majorModuleResourceLevel["Industry"]]))
+            
+            totalSplitResources = (resourceBaseAmounts["Industry"] + returnMechanicalPalTotal(mechanicPalAmount, mechanicalPalLevel, mechanicalPalLevelList) + 
+            (majorModuleResourceCount["Industry"] * majorModuleResourceLevelList[majorModuleResourceLevel["Industry"]])) / playerAmount
+            
+            print("Industry Level: %d\nIndustry Count: %d\nTotal Industry Per Player: %d\nTotal Industry: %d" % 
+            (majorModuleResourceLevel["Industry"], majorModuleResourceCount["Industry"], totalSplitResources, totalResources))
+            print()
+            
+            # Science
+            totalResources = (resourceBaseAmounts["Science"] + returnMechanicalPalTotal(mechanicPalAmount, mechanicalPalLevel, mechanicalPalLevelList) + 
+            (majorModuleResourceCount["Science"] * majorModuleResourceLevelList[majorModuleResourceLevel["Science"]]))
+            
+            totalSplitResources = (resourceBaseAmounts["Science"] + returnMechanicalPalTotal(mechanicPalAmount, mechanicalPalLevel, mechanicalPalLevelList) + 
+            (majorModuleResourceCount["Science"] * majorModuleResourceLevelList[majorModuleResourceLevel["Science"]])) / playerAmount
+            
+            print("Science Level: %d\nScience Count: %d\nTotal Science Per Player: %d\nTotal Science: %d" % 
+            (majorModuleResourceLevel["Industry"], majorModuleResourceCount["Industry"], totalSplitResources, totalResources))
+            print()
+            
+            # Food
+            totalResources = (resourceBaseAmounts["Food"] + returnMechanicalPalTotal(mechanicPalAmount, mechanicalPalLevel, mechanicalPalLevelList) + 
+            (majorModuleResourceCount["Food"] * majorModuleResourceLevelList[majorModuleResourceLevel["Food"]]))
+            
+            totalSplitResources = (resourceBaseAmounts["Food"] + returnMechanicalPalTotal(mechanicPalAmount, mechanicalPalLevel, mechanicalPalLevelList) + 
+            (majorModuleResourceCount["Food"] * majorModuleResourceLevelList[majorModuleResourceLevel["Food"]])) / playerAmount
+            
+            print("Food Level: %d\nFood Count: %d\nTotal Food Per Player: %d\nTotal Food: %d" % 
+            (majorModuleResourceLevel["Food"], majorModuleResourceCount["Food"], totalSplitResources, totalResources))
+            print()
+            
+        elif userInput == 6:
             # Display all resource levels based on resource count
             print("hi")
         else:
@@ -127,13 +152,17 @@ def main():
 
 
 def displayMenu():
-    print("1. Change Major Modules resource counts")
-    print("2. Change Major Modules resource level")
-    print("3. Change Mechanic Pals")
-    print("4. Display the calculated values")
-    print("5. Display the calculated values using all resource levels")
-    print("6. End program")
+    print("1. Change Player Amount")
+    print("2. Change Major Modules resource counts")
+    print("3. Change Major Modules resource level")
+    print("4. Change Mechanic Pals")
+    print("5. Display the calculated values")
+    print("6. Display the calculated values using all resource levels")
+    print("7. End program")
     print("> ", end='')
+
+def returnMechanicalPalTotal(mpAmount, mpLevel, mpLevelList): 
+    return ((mpAmount * mpLevelList[mpLevel]) / 2)
 
 def defineResourceModuleLevel(majorModuleResourceLevelList, userMenuChoice):
     if userMenuChoice == 1:
