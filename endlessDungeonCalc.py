@@ -13,6 +13,18 @@ def main():
 
     # Create main program loop
     while running == True:
+        print("Count")
+        for x in majorModuleResourceCount:
+            print(x)
+            print(majorModuleResourceCount[x]) 
+        print()
+        
+        print("Level")
+        for x in majorModuleResourceLevel:
+            print(x)
+            print(majorModuleResourceLevel[x]) 
+        print()
+        
         if firstRun == True:
             displayMenu()
             firstRun = False
@@ -24,6 +36,7 @@ def main():
         while userInput < startMenuIndex or userInput > endMenuIndex:
             # Ask the user to reinput their value
             print("Please reinput a value between 1 - 6")
+            print("> ", end='')
             userInput = int(input())
 
         # If we got out of the loop, check to see which user
@@ -40,12 +53,27 @@ def main():
             while userInput < startMajorModuleIndex or userInput > endMajorModuleIndex:
                 # Ask the user to reinput their value
                 print("Please reinput a value between 1 - 3")
+                print("> ", end='')
                 userInput = int(input())
             defineResourceModuleTotals(majorModuleResourceCount, userInput); 
             
         elif userInput == 2:
             # Change Major Modules resource level
-            print("hi")
+            print()
+            print("Which one would you like to change?")
+            print("1. Industry")
+            print("2. Science")
+            print("3. Food")
+            print("> ", end='')
+            userInput = int(input())
+
+            while userInput < startMajorModuleIndex or userInput > endMajorModuleIndex:
+                # Ask the user to reinput their value
+                print("Please reinput a value between 1 - 3")
+                print("> ", end='')
+                userInput = int(input())
+            defineResourceModuleLevel(majorModuleResourceLevel, userInput);
+            
         elif userInput == 3:
             # Set mechanic pals count
             print("hi")
@@ -69,31 +97,83 @@ def displayMenu():
     print("6. End program")
     print("> ", end='')
 
+def defineResourceModuleLevel(majorModuleResourceLevelList, userMenuChoice):
+    if userMenuChoice == 1:
+        # Industry
+        print("What level is your Industry Modules?")
+        print("> ", end='')
+        userInput = int(input())
+        
+        while userInput < 0:
+            # Ask the user to reinput their value
+            print("Cannot have a negative amount of Industry level?")
+            print("Please input a positive value")
+            print("> ", end='')
+            userInput = int(input())
+            
+        # Assign the value to the right spot
+        majorModuleResourceLevelList["Industry"] = userInput
+        
+    elif userMenuChoice == 2:
+        # Science
+        print("What level is your Science Modules?")
+        print("> ", end='')
+        userInput = int(input())
+        
+        while userInput < 0:
+            # Ask the user to reinput their value
+            print("Cannot have a negative amount of Science level")
+            print("Please input a positive value")
+            print("> ", end='')
+            userInput = int(input())
+            
+        # Assign the value to the right spot
+        majorModuleResourceLevelList["Science"] = userInput
+
+    else:
+        # Food
+        print("What level is your Food Modules?")
+        print("> ", end='')
+        userInput = int(input())
+        
+        while userInput < 0:
+            # Ask the user to reinput their value
+            print("Cannot have a negative amount of Food level")
+            print("Please input a positive value")
+            print("> ", end='')
+            userInput = int(input())
+        
+        # Assign the value to the right spot
+        majorModuleResourceLevelList["Food"] = userInput
 
 def defineResourceModuleTotals(majorModulesResourceCountList, userMenuChoice):
     if userMenuChoice == 1:
         # Industry
         print("How many total Industry modules of do you have?")
+        print("> ", end='')
         userInput = int(input())
         
         while userInput < 0:
             # Ask the user to reinput their value
             print("Cannot have a negative amount of Industry modules")
             print("Please input a positive value")
+            print("> ", end='')
             userInput = int(input())
             
         # Assign the value to the right spot
-        majorModulesResourceCountList["Industry"] = "a"
+        majorModulesResourceCountList["Industry"] = userInput
         
     elif userMenuChoice == 2:
         # Science
         print("How many total Science modules of do you have?")
+        print("> ", end='')
         userInput = int(input())
         
         while userInput < 0:
             # Ask the user to reinput their value
             print("Cannot have a negative amount of Science modules")
             print("Please input a positive value")
+            print("> ", end='')
             userInput = int(input())
             
         # Assign the value to the right spot
@@ -102,12 +182,14 @@ def defineResourceModuleTotals(majorModulesResourceCountList, userMenuChoice):
     else:
         # Food
         print("How many total Food modules of do you have?")
+        print("> ", end='')
         userInput = int(input())
         
         while userInput < 0:
             # Ask the user to reinput their value
             print("Cannot have a negative amount of Food modules")
             print("Please input a positive value")
+            print("> ", end='')
             userInput = int(input())
         
         # Assign the value to the right spot
