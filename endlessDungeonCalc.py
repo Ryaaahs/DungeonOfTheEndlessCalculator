@@ -122,10 +122,13 @@ def main():
         elif userInput == 5:
             # Display the calculated values
             
+            #Displays the resource values for only one player, with mechanical pal amounts and rounding
             if playerAmount == 1:
                 
                 mechPalValue = math.floor(returnMechanicalPalTotal(mechanicPalAmount, mechanicalPalLevel, mechanicalPalLevelList))
-                
+                print()
+                print("Player Amount: " + str(playerAmount))
+                print("MECHPAL: count/level/amount")
                 print()
                 print("  TYPE  |  LEVEL  |  COUNT  |  MECHPAL  |  TOTAL  |")
                 print("---------------------------------------------------")
@@ -134,21 +137,21 @@ def main():
                 totalResources = int(resourceBaseAmounts["Industry"] + mechPalValue + 
                 (majorModuleResourceCount["Industry"] * majorModuleResourceLevelList[majorModuleResourceLevel["Industry"]]))
                 
-                print("Industry {0:5d} {1:9d} {2:10d} {3:10d}".format(majorModuleResourceLevel["Industry"], majorModuleResourceCount["Industry"], mechPalValue, totalResources), end='')
+                print("Industry {0:5d} {1:9d} {2:8d}/{3:0d}/{4:0d} {5:8d}".format(majorModuleResourceLevel["Industry"], majorModuleResourceCount["Industry"], mechanicPalAmount, mechanicalPalLevel, mechPalValue, totalResources), end='')
                 print()
                 
                 # Science
                 totalResources = int(resourceBaseAmounts["Science"] + mechPalValue + 
                 (majorModuleResourceCount["Science"] * majorModuleResourceLevelList[majorModuleResourceLevel["Science"]]))
                 
-                print("Science {0:6d} {1:9d} {2:10d} {3:10d}".format(majorModuleResourceLevel["Science"], majorModuleResourceCount["Science"], mechPalValue, totalResources), end='')
+                print("Science {0:6d} {1:9d} {2:8d}/{3:0d}/{4:0d} {5:8d}".format(majorModuleResourceLevel["Science"], majorModuleResourceCount["Science"], mechanicPalAmount, mechanicalPalLevel, mechPalValue, totalResources), end='')
                 print()
                 
                 # Food
                 totalResources = int(resourceBaseAmounts["Food"] + mechPalValue + 
                 (majorModuleResourceCount["Food"] * majorModuleResourceLevelList[majorModuleResourceLevel["Food"]]))
                 
-                print("Food {0:9d} {1:9d} {2:10d} {3:10d}".format(majorModuleResourceLevel["Food"], majorModuleResourceCount["Food"], mechPalValue, totalResources), end='')
+                print("Food {0:9d} {1:9d} {2:8d}/{3:0d}/{4:0d} {5:8d}".format(majorModuleResourceLevel["Food"], majorModuleResourceCount["Food"], mechanicPalAmount, mechanicalPalLevel, mechPalValue, totalResources), end='')
                 print()
                 
             else:
