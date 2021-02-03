@@ -1,3 +1,5 @@
+import math
+
 def main():
     # Main function
     running = True
@@ -119,29 +121,34 @@ def main():
                 
         elif userInput == 5:
             # Display the calculated values
-            # Industry
+            
             if playerAmount == 1:
-                totalResources = (resourceBaseAmounts["Industry"] + returnMechanicalPalTotal(mechanicPalAmount, mechanicalPalLevel, mechanicalPalLevelList) + 
+                
+                mechPalValue = math.floor(returnMechanicalPalTotal(mechanicPalAmount, mechanicalPalLevel, mechanicalPalLevelList))
+                
+                print()
+                print("  TYPE  |  LEVEL  |  COUNT  |  MECHPAL  |  TOTAL  |")
+                print("---------------------------------------------------")
+                
+                # Industry
+                totalResources = int(resourceBaseAmounts["Industry"] + mechPalValue + 
                 (majorModuleResourceCount["Industry"] * majorModuleResourceLevelList[majorModuleResourceLevel["Industry"]]))
                 
-                print("Industry Level: %d\nIndustry Count: %d\nTotal Industry: %d" % 
-                (majorModuleResourceLevel["Industry"], majorModuleResourceCount["Industry"], totalResources))
+                print("Industry {0:5d} {1:9d} {2:10d} {3:10d}".format(majorModuleResourceLevel["Industry"], majorModuleResourceCount["Industry"], mechPalValue, totalResources), end='')
                 print()
                 
                 # Science
-                totalResources = (resourceBaseAmounts["Science"] + returnMechanicalPalTotal(mechanicPalAmount, mechanicalPalLevel, mechanicalPalLevelList) + 
+                totalResources = int(resourceBaseAmounts["Science"] + mechPalValue + 
                 (majorModuleResourceCount["Science"] * majorModuleResourceLevelList[majorModuleResourceLevel["Science"]]))
                 
-                print("Science Level: %d\nScience Count: %d\nTotal Science: %d" % 
-                (majorModuleResourceLevel["Science"], majorModuleResourceCount["Science"], totalResources))
+                print("Science {0:6d} {1:9d} {2:10d} {3:10d}".format(majorModuleResourceLevel["Science"], majorModuleResourceCount["Science"], mechPalValue, totalResources), end='')
                 print()
                 
                 # Food
-                totalResources = (resourceBaseAmounts["Food"] + returnMechanicalPalTotal(mechanicPalAmount, mechanicalPalLevel, mechanicalPalLevelList) + 
+                totalResources = int(resourceBaseAmounts["Food"] + mechPalValue + 
                 (majorModuleResourceCount["Food"] * majorModuleResourceLevelList[majorModuleResourceLevel["Food"]]))
                 
-                print("Food Level: %d\nFood Count: %d\nTotal Food: %d" % 
-                (majorModuleResourceLevel["Food"], majorModuleResourceCount["Food"], totalResources))
+                print("Food {0:9d} {1:9d} {2:10d} {3:10d}".format(majorModuleResourceLevel["Food"], majorModuleResourceCount["Food"], mechPalValue, totalResources), end='')
                 print()
                 
             else:
@@ -198,7 +205,10 @@ def displayMenu():
     print("> ", end='')
 
 def returnMechanicalPalTotal(mpAmount, mpLevel, mpLevelList): 
-    return ((mpAmount * mpLevelList[mpLevel]) / 2)
+    if(mpAmount == 0):
+        return 0
+    else:
+        return ((mpAmount * mpLevelList[mpLevel]) / 2)
 
 def defineResourceModuleLevel(majorModuleResourceLevelList, userMenuChoice):
     if userMenuChoice == 1:
