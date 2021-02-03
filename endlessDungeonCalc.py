@@ -36,7 +36,16 @@ def main():
 
         # If we got out of the loop, check to see which userInput we got
         if userInput == 1:
-            print()
+            # Change Player Amount
+            print("How many players are in the game? (Range of 1-4)")
+            userInput = int(input())
+            while userInput < 1 or userInput > 4:
+                # Ask the user to reinput their value
+                print("Please reinput a value between 1 - 4")
+                print("> ", end='')
+                userInput = int(input())
+            playerAmount = userInput
+            
         elif userInput == 2:
             # Change Major Modules resource counts
             print()
@@ -111,38 +120,65 @@ def main():
         elif userInput == 5:
             # Display the calculated values
             # Industry
-            totalResources = (resourceBaseAmounts["Industry"] + returnMechanicalPalTotal(mechanicPalAmount, mechanicalPalLevel, mechanicalPalLevelList) + 
-            (majorModuleResourceCount["Industry"] * majorModuleResourceLevelList[majorModuleResourceLevel["Industry"]]))
-            
-            totalSplitResources = (resourceBaseAmounts["Industry"] + returnMechanicalPalTotal(mechanicPalAmount, mechanicalPalLevel, mechanicalPalLevelList) + 
-            (majorModuleResourceCount["Industry"] * majorModuleResourceLevelList[majorModuleResourceLevel["Industry"]])) / playerAmount
-            
-            print("Industry Level: %d\nIndustry Count: %d\nTotal Industry Per Player: %d\nTotal Industry: %d" % 
-            (majorModuleResourceLevel["Industry"], majorModuleResourceCount["Industry"], totalSplitResources, totalResources))
-            print()
-            
-            # Science
-            totalResources = (resourceBaseAmounts["Science"] + returnMechanicalPalTotal(mechanicPalAmount, mechanicalPalLevel, mechanicalPalLevelList) + 
-            (majorModuleResourceCount["Science"] * majorModuleResourceLevelList[majorModuleResourceLevel["Science"]]))
-            
-            totalSplitResources = (resourceBaseAmounts["Science"] + returnMechanicalPalTotal(mechanicPalAmount, mechanicalPalLevel, mechanicalPalLevelList) + 
-            (majorModuleResourceCount["Science"] * majorModuleResourceLevelList[majorModuleResourceLevel["Science"]])) / playerAmount
-            
-            print("Science Level: %d\nScience Count: %d\nTotal Science Per Player: %d\nTotal Science: %d" % 
-            (majorModuleResourceLevel["Industry"], majorModuleResourceCount["Industry"], totalSplitResources, totalResources))
-            print()
-            
-            # Food
-            totalResources = (resourceBaseAmounts["Food"] + returnMechanicalPalTotal(mechanicPalAmount, mechanicalPalLevel, mechanicalPalLevelList) + 
-            (majorModuleResourceCount["Food"] * majorModuleResourceLevelList[majorModuleResourceLevel["Food"]]))
-            
-            totalSplitResources = (resourceBaseAmounts["Food"] + returnMechanicalPalTotal(mechanicPalAmount, mechanicalPalLevel, mechanicalPalLevelList) + 
-            (majorModuleResourceCount["Food"] * majorModuleResourceLevelList[majorModuleResourceLevel["Food"]])) / playerAmount
-            
-            print("Food Level: %d\nFood Count: %d\nTotal Food Per Player: %d\nTotal Food: %d" % 
-            (majorModuleResourceLevel["Food"], majorModuleResourceCount["Food"], totalSplitResources, totalResources))
-            print()
-            
+            if playerAmount == 1:
+                totalResources = (resourceBaseAmounts["Industry"] + returnMechanicalPalTotal(mechanicPalAmount, mechanicalPalLevel, mechanicalPalLevelList) + 
+                (majorModuleResourceCount["Industry"] * majorModuleResourceLevelList[majorModuleResourceLevel["Industry"]]))
+                
+                print("Industry Level: %d\nIndustry Count: %d\nTotal Industry: %d" % 
+                (majorModuleResourceLevel["Industry"], majorModuleResourceCount["Industry"], totalResources))
+                print()
+                
+                # Science
+                totalResources = (resourceBaseAmounts["Science"] + returnMechanicalPalTotal(mechanicPalAmount, mechanicalPalLevel, mechanicalPalLevelList) + 
+                (majorModuleResourceCount["Science"] * majorModuleResourceLevelList[majorModuleResourceLevel["Science"]]))
+                
+                print("Science Level: %d\nScience Count: %d\nTotal Science: %d" % 
+                (majorModuleResourceLevel["Science"], majorModuleResourceCount["Science"], totalResources))
+                print()
+                
+                # Food
+                totalResources = (resourceBaseAmounts["Food"] + returnMechanicalPalTotal(mechanicPalAmount, mechanicalPalLevel, mechanicalPalLevelList) + 
+                (majorModuleResourceCount["Food"] * majorModuleResourceLevelList[majorModuleResourceLevel["Food"]]))
+                
+                print("Food Level: %d\nFood Count: %d\nTotal Food: %d" % 
+                (majorModuleResourceLevel["Food"], majorModuleResourceCount["Food"], totalResources))
+                print()
+                
+            else:
+                # If player amount is greater than 1, we need to implement a rounding system to make it fair for the players as based within the game.
+                # For example if you have three players with 0 Industry generators, you will have 5(base) / 3 which doesn't divide nice evenly, so the game
+                # will round to the next value divisible by 3 which is 6 in this case. 
+                totalResources = (resourceBaseAmounts["Industry"] + returnMechanicalPalTotal(mechanicPalAmount, mechanicalPalLevel, mechanicalPalLevelList) + 
+                (majorModuleResourceCount["Industry"] * majorModuleResourceLevelList[majorModuleResourceLevel["Industry"]]))
+                
+                totalSplitResources = (resourceBaseAmounts["Industry"] + returnMechanicalPalTotal(mechanicPalAmount, mechanicalPalLevel, mechanicalPalLevelList) + 
+                (majorModuleResourceCount["Industry"] * majorModuleResourceLevelList[majorModuleResourceLevel["Industry"]])) / playerAmount
+                
+                print("Industry Level: %d\nIndustry Count: %d\nTotal Industry Per Player: %d\nTotal Industry: %d" % 
+                (majorModuleResourceLevel["Industry"], majorModuleResourceCount["Industry"], totalSplitResources, totalResources))
+                print()
+                
+                # Science
+                totalResources = (resourceBaseAmounts["Science"] + returnMechanicalPalTotal(mechanicPalAmount, mechanicalPalLevel, mechanicalPalLevelList) + 
+                (majorModuleResourceCount["Science"] * majorModuleResourceLevelList[majorModuleResourceLevel["Science"]]))
+                
+                totalSplitResources = (resourceBaseAmounts["Science"] + returnMechanicalPalTotal(mechanicPalAmount, mechanicalPalLevel, mechanicalPalLevelList) + 
+                (majorModuleResourceCount["Science"] * majorModuleResourceLevelList[majorModuleResourceLevel["Science"]])) / playerAmount
+                
+                print("Science Level: %d\nScience Count: %d\nTotal Science Per Player: %d\nTotal Science: %d" % 
+                (majorModuleResourceLevel["Science"], majorModuleResourceCount["Science"], totalSplitResources, totalResources))
+                print()
+                
+                # Food
+                totalResources = (resourceBaseAmounts["Food"] + returnMechanicalPalTotal(mechanicPalAmount, mechanicalPalLevel, mechanicalPalLevelList) + 
+                (majorModuleResourceCount["Food"] * majorModuleResourceLevelList[majorModuleResourceLevel["Food"]]))
+                
+                totalSplitResources = (resourceBaseAmounts["Food"] + returnMechanicalPalTotal(mechanicPalAmount, mechanicalPalLevel, mechanicalPalLevelList) + 
+                (majorModuleResourceCount["Food"] * majorModuleResourceLevelList[majorModuleResourceLevel["Food"]])) / playerAmount
+                
+                print("Food Level: %d\nFood Count: %d\nTotal Food Per Player: %d\nTotal Food: %d" % 
+                (majorModuleResourceLevel["Food"], majorModuleResourceCount["Food"], totalSplitResources, totalResources))
+                print()
         elif userInput == 6:
             # Display all resource levels based on resource count
             print("hi")
